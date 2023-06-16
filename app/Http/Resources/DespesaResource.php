@@ -10,16 +10,23 @@ use Illuminate\Support\Facades\Gate;
 
 class DespesaResource extends JsonResource
 {
-    public function toArray(Request $request): array
+    /**
+     * Transforma a instância do recurso em um array.
+     */
+    public function toArray($request)
     {
-        $links = [
-            [
+        $links = [];
+
+        // Verifica se o usuário pode visualizar todas as despesas
+        if (Gate::allows('viewAny', Despesa::find($this->id))) {
+            $links[] = [
                 'href' => route('despesas.index'),
                 'rel' => "despesas.index",
                 'type' => "GET|HEAD"
-            ],
-        ];
+            ];
+        }
 
+        // Verifica se o usuário pode criar uma nova despesa
         if (Gate::allows('create', Despesa::class)) {
             $links[] = [
                 'href' => route('despesas.store'),
@@ -28,6 +35,7 @@ class DespesaResource extends JsonResource
             ];
         }
 
+        // Verifica se o usuário pode visualizar uma despesa específica
         if (Gate::allows('view', Despesa::find($this->id))) {
             $links[] = [
                 'href' => route('despesas.show', $this->id),
@@ -36,6 +44,7 @@ class DespesaResource extends JsonResource
             ];
         }
 
+        // Verifica se o usuário pode atualizar uma despesa específica
         if (Gate::allows('update', Despesa::find($this->id))) {
             $links[] = [
                 'href' => route('despesas.update', $this->id),
@@ -44,7 +53,8 @@ class DespesaResource extends JsonResource
             ];
         }
 
-        if (Gate::allows('delete', Despesa::find($this->id))) {
+        // Verifica se o usuário pode excluir uma despesa
+        if (Gate::allows('delete', Despesa::class)) {
             $links[] = [
                 'href' => route('despesas.destroy', $this->id),
                 'rel' => "despesas.destroy",

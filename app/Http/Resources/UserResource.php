@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserResource extends JsonResource
 {
-    public function toArray(Request $request): array
+    /**
+     * Transforma a instância do recurso em um array.
+     */
+    public function toArray($request)
     {
+        // Constrói o array de links
         $links = [
             [
                 'href' => route('login'),
@@ -18,6 +22,7 @@ class UserResource extends JsonResource
             ],
         ];
 
+        // Adiciona links adicionais se o usuário estiver autenticado
         if (Auth::check()) {
             $links[] = [
                 'href' => route('logout'),
@@ -32,6 +37,7 @@ class UserResource extends JsonResource
             ];
         }
 
+        // Retorna o array representando o recurso do usuário
         return [
             'id' => $this->id,
             'name' => $this->name,

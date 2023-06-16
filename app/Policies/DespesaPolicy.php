@@ -8,20 +8,28 @@ use Illuminate\Auth\Access\Response;
 
 class DespesaPolicy
 {
-
-    public function viewAny(User $user): Response
+    /**
+     * Determina se o usuário pode visualizar uma lista de despesas.
+     */
+    public function viewAny()
     {
         return Response::allow();
     }
 
-    public function view(User $user, Despesa $despesa): Response
+    /**
+     * Determina se o usuário pode visualizar uma despesa específica.
+     */
+    public function view($user, $despesa)
     {
         return $user->id === $despesa->dono || $user->isMod()
             ? Response::allow()
             : Response::deny('Você não pode ver esta despesa');
     }
 
-    public function create(User $user): Response
+    /**
+     * Determina se o usuário pode criar uma nova despesa.
+     */
+    public function create($user)
     {
         // Verifica se o usuário tem o e-mail verificado
         if ($user->hasVerifiedEmail()) {
@@ -31,7 +39,10 @@ class DespesaPolicy
         }
     }
 
-    public function update(User $user, Despesa $despesa): Response
+    /**
+     * Determina se o usuário pode atualizar uma despesa existente.
+     */
+    public function update($user, $despesa)
     {
         // Verifica se o usuário tem o e-mail verificado e se é o dono da despesa
         if ($user->hasVerifiedEmail() && $user?->id === $despesa?->dono) {
@@ -41,7 +52,10 @@ class DespesaPolicy
         }
     }
 
-    public function delete(User $user, Despesa $despesa): Response
+    /**
+     * Determina se o usuário pode excluir uma despesa.
+     */
+    public function delete($user)
     {
         // Verifica se o usuário é um Moderador
         if ($user->isMod()) {
@@ -51,7 +65,11 @@ class DespesaPolicy
         }
     }
 
-    public function before(User $user, string $ability): ?bool
+    /**
+     * Executado antes de todas as outras verificações de autorização.
+     * Permite que o administrador ignore as outras verificações e tenha acesso completo.
+     */
+    public function before($user, $ability)
     {
         if ($user->isAdministrator()) {
             return true;

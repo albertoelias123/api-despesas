@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Http\Resources;
-
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class DespesasCollection extends ResourceCollection
 {
+    // Define o nome do atributo de envolvimento para a coleção
     public static $wrap = 'despesas';
 
-    public function toArray(Request $request): array
+    /**
+     * Transforma a coleção de recursos em um array.
+     */
+    public function toArray($request)
     {
         return [
-            'despesas' => $this->collection,
+            'despesas' => $this->collection, // Atribui a coleção de despesas
         ];
     }
 }
