@@ -4,6 +4,10 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\UnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -27,4 +31,18 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ModelNotFoundException) {
+            return new JsonResponse(['error' => 'Recurso não encontrado.'], 404);
+        }
+
+        if ($exception instanceof AccessDeniedHttpException ) {
+            return new JsonResponse(['error' => $exception->getMessage()], 403);
+        }
+
+        return parent::render($request, $exception);
+    }
+
 }
