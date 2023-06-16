@@ -2,9 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Despesa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class DespesaResource extends JsonResource
@@ -19,7 +21,7 @@ class DespesaResource extends JsonResource
             ],
         ];
 
-        if (Gate::allows('create', $this->resource)) {
+        if (Gate::allows('create', Despesa::class)) {
             $links[] = [
                 'href' => route('despesas.store'),
                 'rel' => "despesas.store",
@@ -27,7 +29,7 @@ class DespesaResource extends JsonResource
             ];
         }
 
-        if (Gate::allows('view', $this->resource)) {
+        if (Gate::allows('view', Despesa::find($this->id))) {
             $links[] = [
                 'href' => route('despesas.show', $this->id),
                 'rel' => "despesas.show",
@@ -35,7 +37,7 @@ class DespesaResource extends JsonResource
             ];
         }
 
-        if (Gate::allows('update', $this->resource)) {
+        if (Gate::allows('update', Despesa::find($this->id))) {
             $links[] = [
                 'href' => route('despesas.update', $this->id),
                 'rel' => "despesas.update",
@@ -43,7 +45,7 @@ class DespesaResource extends JsonResource
             ];
         }
 
-        if (Gate::allows('delete', $this->resource)) {
+        if (Gate::allows('delete', Despesa::find($this->id))) {
             $links[] = [
                 'href' => route('despesas.destroy', $this->id),
                 'rel' => "despesas.destroy",

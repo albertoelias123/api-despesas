@@ -8,22 +8,19 @@ use Illuminate\Auth\Access\Response;
 
 class DespesaPolicy
 {
+
     public function viewAny(User $user): Response
     {
-        // Via de regra ninguém pode visualizar todas as despesas
-        return Response::deny("Você não pode ver todas as despesas");
+        return Response::allow();
     }
 
     public function view(User $user, Despesa $despesa): Response
     {
-        return $user->id === $despesa->dono
+        return $user->id === $despesa->dono || $user->isMod()
             ? Response::allow()
             : Response::deny('Você não pode ver esta despesa');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): Response
     {
         // Verifica se o usuário tem o e-mail verificado
@@ -37,7 +34,7 @@ class DespesaPolicy
     public function update(User $user, Despesa $despesa): Response
     {
         // Verifica se o usuário tem o e-mail verificado e se é o dono da despesa
-        if ($user->hasVerifiedEmail() && $user->id === $despesa->dono) {
+        if ($user->hasVerifiedEmail() && $user?->id === $despesa?->dono) {
             return Response::allow();
         } else {
             return Response::deny('Você não pode atualizar esta despesa');

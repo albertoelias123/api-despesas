@@ -8,20 +8,6 @@ use Illuminate\Support\Str;
 
 class DespesaStoreRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        $authUser = Auth::user();
-
-        // Verifica se o usuário está autenticado e se o e-mail já foi verificado
-        if ($authUser?->hasVerifiedEmail())
-            // Verifica se o user_id informado é igual ao id do usuário autenticado
-            // Pois o usuário só pode criar despesas para si mesmo
-            return $this->input('dono') === $authUser->id;
-
-
-        return false;
-    }
-
     protected function prepareForValidation(): void
     {
        // Se tiver dono, faz typecasting pra int
