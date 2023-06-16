@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Despesa;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,12 +15,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         \App\Models\User::factory(10)->create();
 
-         \App\Models\User::factory()->create([
-             'name' => 'Test User',
-             'email' => 'test@example.com',
-             'password' => 'password'
-         ]);
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => 'password',
+                'email_verified_at' => now(),
+                'type' => 'admin'
+            ]
+        )->despesas()->saveMany(
+            Despesa::factory(25)->make()
+        );
+
+        User::factory(5)
+            ->isRegular()
+            ->has(Despesa::factory(5))
+            ->create();
+
+        $this->call([
+            DespesasSeeder::class,
+        ]);
     }
 }
