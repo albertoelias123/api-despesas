@@ -112,3 +112,7 @@ DELETE /api/despesas/{id}
 - Transformação da API é realizada utilizando API Resources.
 - Os recursos relacionados às despesas são roteados utilizando API Resource Routes.
 - Restrição de acesso é feita utilizando Policies com regras adicionais e tipos de usuário definidos.
+
+## Adição de Links ao Retorno da API
+
+Uma prática interessante ao projetar uma API é adicionar links ao retorno das respostas, seguindo o padrão HATEOAS (Hypermedia as the Engine of Application State). Esses links permitem que os clientes interajam de forma mais dinâmica e descubram facilmente outras ações ou recursos relacionados ao objeto retornado. O padrão HATEOAS promove a descoberta e a navegação da API de forma mais autônoma e orientada pelo próprio recurso retornado.
