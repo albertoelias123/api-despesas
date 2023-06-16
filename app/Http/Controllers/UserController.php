@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,9 +12,6 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
 
-/**
-     * Display a listing of the resource.
-     */
     public function loginUser(Request $request): Response
     {
         $validator = Validator::make($request->all(), [
@@ -37,34 +35,24 @@ class UserController extends Controller
         return Response(['message' => 'email or password wrong'],401);
     }
 
-     /**
-     * Store a newly created resource in storage.
-     */
-    public function userDetails(): Response
+
+    public function authUserDetails(): Response
     {
         if (Auth::check()) {
 
             $user = Auth::user();
 
-            return Response(['data' => $user],200);
+            return Response(new UserResource($user),200);
         }
 
         return Response(['data' => 'Unauthorized'],401);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function revokeAllTokens(Request $request): Response
     {
         $user = Auth::user();
 
         $user->tokens()->delete();
-
-        //$request->user()->currentAccessToken()->delete();
-
-
-        //dd($user->currentAccessToken());
 
         return Response(['data' => 'User Logout successfully.'],200);
     }
