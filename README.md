@@ -1,66 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# API de Despesas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta é uma API de Despesas que permite gerenciar e acessar informações sobre despesas. Ela foi construída utilizando o framework Laravel 10.
 
-## About Laravel
+## Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Cadastro, consulta, atualização e exclusão de despesas
+- Autenticação de usuários
+- Restrição de acesso com base em políticas
+- Validação de dados com Form Requests
+- Transformação da API com API Resources
+- Roteamento dos recursos utilizando API Resource Routes
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requisitos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.1
+- Composer
+- Laravel >= 10
 
-## Learning Laravel
+## Instalação
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone o repositório:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```shell
+git clone https://github.com/albertoelias123/onfly-teste-api-rest.git
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Execute o projeto utilizando o Laravel Sail:
 
-## Laravel Sponsors
+```shell
+./vendor/bin/sail up -d
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Configure o arquivo .env com as informações do banco de dados e as demais configurações necessárias.
 
-### Premium Partners
+No arquivo .env.example estão algumas atributos para ativar o debug com o Laravel Sail, já esta configurado para utilizar basta descomentar a linha:
+```env
+SAIL_XDEBUG_MODE=develop,debug,coverage
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4. Execute as migrações e seeders do banco de dados:
 
-## Contributing
+```shell
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## API
 
-## Code of Conduct
+### Autenticação
+Faça uma solicitação de login para obter um token de acesso:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+```bash
+POST /api/login
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+{
+  "email": "usuario@example.com",
+  "password": "senha",
+  "device_name": "dispositivo"
+}
+```
 
-## License
+Use o token de acesso nas solicitações subsequentes adicionando o cabeçalho Authorization: Bearer {token}.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+### Despesas
+
+- Listar todas as despesas
+
+```bash
+GET /api/despesas
+```
+
+- Cadastrar uma nova despesa
+```bash
+POST /api/despesas
+
+{
+  "descricao": "Despesa 1",
+  "valor": 100.00,
+  "data": "2023-06-15",
+  "dono": 1
+}
+```
+
+- Consultar uma despesa específica
+```bash
+GET /api/despesas/{id}
+```
+
+- Atualizar uma despesa
+```bash
+PUT /api/despesas/{id}
+
+{
+  "descricao": "Despesa 1",
+  "valor": 100.00,
+  "data": "2023-06-15",
+  "dono": 1
+}
+```
+
+- Excluir uma despesa
+```bash
+DELETE /api/despesas/{id}
+```
+
+## Detalhes técnicos
+
+- Validação dos dados da despesa é feita utilizando Form Requests.
+- Transformação da API é realizada utilizando API Resources.
+- Os recursos relacionados às despesas são roteados utilizando API Resource Routes.
+- Restrição de acesso é feita utilizando Policies com regras adicionais e tipos de usuário definidos.
