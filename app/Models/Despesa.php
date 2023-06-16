@@ -12,31 +12,27 @@ class Despesa extends Model
     use HasFactory;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * Os atributos que podem ser atribuídos em massa.
+     * @var array
      */
     protected $fillable = [
         'descricao',
         'data',
         'valor',
-        'dono',
-        'type'
+        'dono'
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * Os atributos que devem ser convertidos.
+     * @var array
      */
     protected $casts = [
         'data' => 'date',
         'type' => UserType::class
     ];
 
-
     /**
-     * Usuário associado a despesa
+     * Obtém o usuário associado à despesa.
      */
     public function dono(): BelongsTo
     {
