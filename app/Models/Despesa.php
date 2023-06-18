@@ -27,8 +27,7 @@ class Despesa extends Model
      * @var array
      */
     protected $casts = [
-        'data' => 'date',
-        'type' => UserType::class
+        'data' => 'date'
     ];
 
     /**
