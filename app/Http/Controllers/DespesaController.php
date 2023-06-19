@@ -34,7 +34,8 @@ class DespesaController extends Controller
             return (new DespesasCollection(Despesa::paginate()))->response();
         }
 
-        return (new DespesasCollection(Auth::user()->despesas()->paginate()))->response();
+        if(Auth::user()->isRegular())
+            return (new DespesasCollection(Auth::user()->despesas()->paginate()))->response();
     }
 
     /**
@@ -94,7 +95,7 @@ class DespesaController extends Controller
         $deleted = $despesa->delete();
 
         return new JsonResponse([
-            'deleted' => $deleted ? "Usuário removido com sucesso." : "Falha ao remover usuário.",
+            'deleted' => $deleted ? "Despesa removida com sucesso." : "Falha ao remover despesa.",
             '_links' => [
                 [
                     'href' => route('despesas.index'),

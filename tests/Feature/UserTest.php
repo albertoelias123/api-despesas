@@ -108,7 +108,7 @@ test('apenas moderadores e administradores podem excluir uma despesa', function 
 
     // Padrão do JSON de resposta esperado quando a exclusão é bem-sucedida
     $retornoEsperadoDespesaDeletada = [
-        'deleted' => 'Usuário removido com sucesso.',
+        'deleted' => 'Despesa removida com sucesso.',
         '_links' => [
             [
                 'href' => 'http://localhost/v1/despesas',
@@ -165,4 +165,14 @@ test('apenas moderadores e administradores podem excluir uma despesa', function 
     $response->assertJson([
         'message' => 'Apenas Moderadores podem excluir despesas'
     ]);
+});
+
+test('login retorna erros de validação quando os campos obrigatórios estão ausentes', function () {
+    User::factory()->create();
+
+    $response = $this->postJson(route('login'), []);
+
+    $response->assertStatus(422);
+    $response->assertJsonValidationErrors(['email', 'password', 'device_name']);
+    $response->assertJson(['message' => 'Os dados fornecidos para login são inválidos']);
 });

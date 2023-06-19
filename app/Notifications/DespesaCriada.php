@@ -42,16 +42,4 @@ class DespesaCriada extends Notification implements ShouldQueue
                     ->line("Valor: {$this->despesa->valor}")
                     ->line("Descrição:  {$this->despesa->descricao}");
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
-    {
-        return [
-            //
-        ];
-    }
 }

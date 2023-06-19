@@ -30,8 +30,12 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return Response(['message' => $validator->errors()], 401);
+            return response([
+                'message' => 'Os dados fornecidos para login são inválidos',
+                'errors' => $validator->errors()
+            ], 422);
         }
+
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
@@ -51,12 +55,8 @@ class UserController extends Controller
      */
     public function authUserDetails(): Response
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-            return Response(new UserResource($user), 200);
-        }
-
-        return Response(['data' => 'Unauthorized'], 401);
+        $user = Auth::user();
+        return Response(new UserResource($user), 200);
     }
 
     /**
