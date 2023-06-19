@@ -7,6 +7,7 @@ use App\Http\Requests\DespesaUpdateRequest;
 use App\Http\Resources\DespesaResource;
 use App\Http\Resources\DespesasCollection;
 use App\Models\Despesa;
+use App\Notifications\DespesaCriada;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,8 @@ class DespesaController extends Controller
         $validated = $request->validated();
 
         $despesa = Despesa::create($validated);
+
+        Auth::user()->notify(new DespesaCriada($despesa));
 
         return (new DespesaResource($despesa))->response();
     }
