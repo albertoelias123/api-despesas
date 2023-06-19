@@ -94,7 +94,7 @@ class DespesaController extends Controller
         $deleted = $despesa->delete();
 
         return new JsonResponse([
-            'deleted' => $deleted,
+            'deleted' => $deleted ? "Usuário removido com sucesso." : "Falha ao remover usuário.",
             '_links' => [
                 [
                     'href' => route('despesas.index'),
@@ -105,6 +105,11 @@ class DespesaController extends Controller
                     'href' => route('despesas.store'),
                     'rel' => "despesas.store",
                     'type' => "POST"
+                ],
+                [
+                    'href' => route('despesas.destroy', "ID"),
+                    'rel' => "despesas.destroy",
+                    'type' => "DELETE"
                 ]
             ]
         ]);
