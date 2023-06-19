@@ -1,14 +1,9 @@
 <?php
 
-use App\Http\Requests\DespesaStoreRequest;
-use App\Http\Requests\DespesaUpdateRequest;
 use App\Models\Despesa;
 use App\Models\User;
 use App\Notifications\DespesaCriada;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Sanctum\Sanctum;
 
