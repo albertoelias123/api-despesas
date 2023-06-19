@@ -44,10 +44,6 @@ class Handler extends ExceptionHandler
             return new JsonResponse(['error' => 'Recurso não encontrado.'], 404);
         }
 
-        if ($exception instanceof AccessDeniedHttpException) {
-            return new JsonResponse(['error' => $exception->getMessage()], 403);
-        }
-
         return parent::render($request, $exception);
     }
 }

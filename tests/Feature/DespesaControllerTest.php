@@ -107,6 +107,7 @@ test('store cria uma nova despesa e retorno dentro do padrão', function () {
 
     $this->assertNotNull($despesa);
     $this->assertEquals($dadosDespesa['descricao'], $despesa->descricao);
+    $this->assertEquals($user->id, $despesa->dono()->first()->id);
 
     Notification::assertSentTo($user, DespesaCriada::class);
 });
