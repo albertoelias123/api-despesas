@@ -1,6 +1,29 @@
 # API de Despesas
 
-Esta é uma API de Despesas que permite gerenciar e acessar informações sobre despesas. Ela foi construída utilizando o framework Laravel 10.
+Este repositório contém uma API de Despesas que permite gerenciar e acessar informações sobre despesas. Foi desenvolvido como parte de um teste técnico, sendo um case de estudo que visa demonstrar minha capacidade técnica e habilidades de desenvolvimento.
+
+A API foi construída utilizando o framework Laravel 10, aproveitando seus recursos poderosos e sua vasta comunidade de desenvolvedores. Ela fornece funcionalidades como cadastro, consulta, atualização e exclusão de despesas, autenticação de usuários, restrição de acesso com base em políticas, validação de dados com Form Requests e transformação da API com API Resources.
+
+É importante ressaltar que este projeto não tem a finalidade de ser uma aplicação em produção, mas sim um exemplo de implementação para avaliação técnica. Ele foi desenvolvido para demonstrar minha proficiência em desenvolvimento de APIs e seguir as melhores práticas de desenvolvimento.
+
+Fique à vontade para explorar o código-fonte, revisar a estrutura e as funcionalidades implementadas, e entrar em contato caso tenha alguma dúvida ou sugestão de melhoria.
+
+**Importante:** Este repositório e projeto são apenas para fins de demonstração e estudo, e não têm a intenção de serem usados em produção ou como uma solução completa para gerenciamento de despesas.
+
+## Índice
+
+- [API de Despesas](#api-de-despesas)
+- [Funcionalidades](#funcionalidades)
+- [Requisitos](#requisitos)
+- [Instalação](#instalação)
+- [API](#api)
+  - [Autenticação](#autenticação)
+  - [Despesas](#despesas)
+- [Detalhes técnicos](#detalhes-técnicos)
+- [Padrão de Commits Conventional Commit](#padrão-de-commits-conventional-commit)
+- [Testes com Pest Framework](#testes-com-pest-framework)
+- [Adição de Links ao Retorno da API (HATEOAS)](#adição-de-links-ao-retorno-da-api-hateoas)
+
 
 ## Funcionalidades
 
@@ -208,7 +231,7 @@ No projeto atual a cobertura esta por volta de 96%.
 
 Essas são algumas opções que o Pest oferece para auxiliar na execução e análise dos testes. Aproveite esses recursos para garantir a qualidade e confiabilidade do seu código.
 
-## Adição de Links ao Retorno da API
+## Adição de Links ao Retorno da API (HATEOAS)
 
 Ao projetar uma API, acredito que seja uma prática interessante adicionar links ao retorno das respostas, seguindo o padrão HATEOAS (Hypermedia as the Engine of Application State). Esses links permitem que os clientes interajam de forma mais dinâmica e descubram facilmente outras ações ou recursos relacionados ao objeto retornado. O padrão HATEOAS promove a descoberta e a navegação da API de forma mais autônoma e orientada pelo próprio recurso retornado.
 
