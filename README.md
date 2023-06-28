@@ -112,7 +112,110 @@ DELETE /api/despesas/{id}
 - Transformação da API é realizada utilizando API Resources.
 - Os recursos relacionados às despesas são roteados utilizando API Resource Routes.
 - Restrição de acesso é feita utilizando Policies com regras adicionais e tipos de usuário definidos.
+- Foi utilizado o padrão Conventional Commits
+- Foi utilizado o Pest para realizar os Testes
+
+## Padrão de Commits Conventional Commit
+
+Neste projeto, foi adotado o padrão de commits Conventional Commit para fornecer uma estrutura consistente e informativa para as mensagens de commit. Esse padrão ajuda a transmitir claramente a intenção de cada commit e facilita a geração de changelogs automatizados.
+
+### Como funciona o padrão Conventional Commit?
+
+O padrão Conventional Commit segue uma convenção específica para as mensagens de commit, que consiste em três partes principais: tipo, escopo e descrição. Cada parte é separada por dois-pontos (:). Aqui está uma descrição detalhada de cada parte:
+
+1. **Tipo**: Indica a natureza do commit e é representado por palavras-chave específicas. Alguns exemplos comuns de tipos são:
+
+   - ✨ `:sparkles:` **feat**: Novo recurso adicionado ao projeto.
+   - 🐛 `:bug:` **fix**: Correção de bug.
+   - 📚 `:books:` **docs**: Alterações na documentação.
+   - 🚀 `:rocket:` **chore**: Atualizações relacionadas a tarefas de manutenção.
+   - ♻️ `:recycle:` **refactor**: Refatoração de código existente.
+   - ✅ `:white_check_mark:` **test**: Adição ou modificação de testes.
+
+2. **Escopo** (opcional): Refere-se à parte específica do projeto que está sendo afetada pelo commit. Nem todos os commits terão um escopo.
+
+3. **Descrição**: Fornece uma breve descrição do que foi realizado no commit. Deve ser claro e conciso.
+
+Ao seguir o padrão Conventional Commit e utilizar emojis para os tipos de commit, você contribui para um histórico de commits mais consistente e compreensível, facilitando a colaboração e o acompanhamento das mudanças no projeto.
+
+## Testes com Pest Framework
+
+Neste projeto, optei por utilizar o framework Pest para realizar os testes. Mas afinal, por que utilizei o Pest?
+
+### Padrão de Teste do Pest
+
+Primeiramente, é importante destacar que o Pest segue um padrão de teste diferente do PHPUnit, que é o framework de teste mais comumente utilizado. Enquanto o PHPUnit utiliza uma estrutura baseada em classes e métodos para escrever testes, o Pest adota uma abordagem mais descritiva, utilizando funções auxiliares como `test`, `it`, `expect`, entre outras. Essa abordagem torna os testes mais legíveis e expressivos, seguindo o conceito de "teste como especificação".
+
+### Benefícios do Pest
+
+Agora, vamos aos benefícios que me levaram a escolher o Pest como framework de teste para este projeto:
+
+- **Sintaxe expressiva e legível**: A sintaxe fluente e descritiva do Pest facilita a leitura e compreensão dos testes, tornando-os mais claros e intuitivos para mim e para outros membros da equipe.
+
+- **Execução paralela de testes**: O Pest permite a execução de testes em paralelo, o que é especialmente útil em projetos maiores, onde o tempo de execução dos testes pode ser significativo. Com a execução paralela, ganho uma melhoria no desempenho e consigo obter resultados mais rapidamente.
+
+- **Análise de cobertura de código**: O Pest integra-se facilmente com ferramentas de análise de cobertura de código, o que me permite identificar áreas do código que não estão sendo testadas adequadamente. Isso contribui para melhorar a qualidade dos testes e garantir uma cobertura abrangente.
+
+- **Modo de observação (watch mode)**: O Pest possui um recurso de modo de observação que monitora automaticamente as alterações nos arquivos de teste. Isso significa que, durante o desenvolvimento, posso realizar alterações no código e os testes relevantes serão executados automaticamente, proporcionando um fluxo de trabalho mais ágil e eficiente.
+
+- **Testes de arquitetura (ainda não utilizado neste projeto)**: Embora não tenha sido aplicado neste projeto em particular, o Pest oferece recursos para realizar testes de arquitetura, o que é útil para verificar se as dependências e estruturas do projeto estão configuradas corretamente. Essa funcionalidade pode ser explorada em futuros projetos, caso necessário.
+
+### Sobre a relação com o PHPUnit
+
+É importante mencionar que o Pest é construído em cima do PHPUnit, que é um framework de teste amplamente utilizado e confiável. O Pest utiliza o PHPUnit como base, fornecendo uma camada adicional de abstração e recursos específicos para testes mais descritivos. Portanto, posso aproveitar a robustez e a confiabilidade do PHPUnit, ao mesmo tempo em que utilizo a sintaxe expressiva e os recursos adicionais do Pest.
+
+### Executando os testes
+
+Para executar os testes utilizando o Pest neste projeto, você pode seguir as seguintes etapas:
+
+1. Inicie o ambiente de desenvolvimento utilizando o Laravel Sail:
+
+```shell
+./vendor/bin/sail up -d
+```
+
+Certifique-se de ter as dependências do projeto instaladas corretamente antes de executar os testes.
+
+2. Execute os testes utilizando o comando a seguir:
+
+```shell
+./vendor/bin/sail test
+``` 
+
+Isso irá executar todos os testes definidos no projeto.
+
+Além disso, o Pest oferece recursos avançados que podem ser úteis durante a execução dos testes. Aqui estão alguns exemplos:
+
+- **Execução paralela dos testes**: Para executar os testes em paralelo e acelerar ainda mais o processo, utilize o seguinte comando:
+
+```shell
+./vendor/bin/sail test --parallel
+```
+
+- **Análise de tempo de execução (Profiling)**: Para identificar os testes mais lentos e otimizar o projeto, você pode executar a análise de tempo de execução. Utilize o seguinte comando:
+
+```shell
+./vendor/bin/sail test --profie
+```
+
+- **Análise de cobertura de testes**: O Pest também oferece a possibilidade de realizar uma análise de cobertura de testes. Para isso, execute o seguinte comando:
+
+```shell
+./vendor/bin/sail test --coverage
+```
+
+No projeto atual a cobertura esta por volta de 96%.
+
+Essas são algumas opções que o Pest oferece para auxiliar na execução e análise dos testes. Aproveite esses recursos para garantir a qualidade e confiabilidade do seu código.
 
 ## Adição de Links ao Retorno da API
 
-Uma prática interessante ao projetar uma API é adicionar links ao retorno das respostas, seguindo o padrão HATEOAS (Hypermedia as the Engine of Application State). Esses links permitem que os clientes interajam de forma mais dinâmica e descubram facilmente outras ações ou recursos relacionados ao objeto retornado. O padrão HATEOAS promove a descoberta e a navegação da API de forma mais autônoma e orientada pelo próprio recurso retornado.
+Ao projetar uma API, acredito que seja uma prática interessante adicionar links ao retorno das respostas, seguindo o padrão HATEOAS (Hypermedia as the Engine of Application State). Esses links permitem que os clientes interajam de forma mais dinâmica e descubram facilmente outras ações ou recursos relacionados ao objeto retornado. O padrão HATEOAS promove a descoberta e a navegação da API de forma mais autônoma e orientada pelo próprio recurso retornado.
+
+No meu projeto, embora a adoção do padrão HATEOAS não fosse um requisito obrigatório/necessário, optei por utilizá-lo com o objetivo de demonstrar minha capacidade técnica e conhecimento sobre as melhores práticas de desenvolvimento de APIs.
+
+A inclusão dos links da API no retorno dos recursos proporciona uma experiência de API enriquecida, permitindo que os clientes descubram e naveguem pelos recursos disponíveis de maneira flexível e autônoma. Essa abordagem mostra meu compromisso em fornecer uma solução bem projetada e alinhada com os padrões e melhores práticas da indústria.
+
+É importante ressaltar que a adoção do padrão HATEOAS foi uma escolha consciente para demonstrar minha habilidade técnica e oferecer uma API mais robusta e intuitiva para os usuários. Embora não seja uma exigência específica do projeto, considerei importante utilizar esse padrão como uma oportunidade de aplicar conhecimentos avançados e fornecer uma experiência mais completa aos usuários da API.
+
+Espero que a inclusão dos links no retorno da API, seguindo o padrão HATEOAS, proporcione uma interação mais intuitiva e enriqueça a experiência dos usuários ao utilizar minha API.
