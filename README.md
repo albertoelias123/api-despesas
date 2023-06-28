@@ -20,9 +20,11 @@ Fique à vontade para explorar o código-fonte, revisar a estrutura e as funcion
   - [Autenticação](#autenticação)
   - [Despesas](#despesas)
 - [Detalhes técnicos](#detalhes-técnicos)
-- [Padrão de Commits Conventional Commit](#padrão-de-commits-conventional-commit)
-- [Testes com Pest Framework](#testes-com-pest-framework)
-- [Adição de Links ao Retorno da API (HATEOAS)](#adição-de-links-ao-retorno-da-api-hateoas)
+  - [Containerização com Laravel Sail e Docker](#containerização-com-laravel-sail-e-docker)
+  - [Padrão de Commits Conventional Commit](#padrão-de-commits-conventional-commit)
+  - [Testes com Pest Framework](#testes-com-pest-framework)
+  - [Adição de Links ao Retorno da API (HATEOAS)](#adição-de-links-ao-retorno-da-api-hateoas)
+
 
 
 ## Funcionalidades
@@ -36,16 +38,15 @@ Fique à vontade para explorar o código-fonte, revisar a estrutura e as funcion
 
 ## Requisitos
 
-- PHP >= 8.1
-- Composer
-- Laravel >= 10
+- Docker
+- Docker Compose
 
 ## Instalação
 
 1. Clone o repositório:
 
 ```shell
-git clone https://github.com/albertoelias123/onfly-teste-api-rest.git
+git clone https://github.com/albertoelias123/api-despesas.git
 ```
 
 2. Execute o projeto utilizando o Laravel Sail:
@@ -54,12 +55,16 @@ git clone https://github.com/albertoelias123/onfly-teste-api-rest.git
 ./vendor/bin/sail up -d
 ```
 
+Certifique-se de ter o Docker e o Docker Compose instalados no seu sistema.
+
 3. Configure o arquivo .env com as informações do banco de dados e as demais configurações necessárias.
 
 No arquivo .env.example estão algumas atributos para ativar o debug com o Laravel Sail, já esta configurado para utilizar basta descomentar a linha:
 ```env
 SAIL_XDEBUG_MODE=develop,debug,coverage
 ```
+
+Esse atributo `SAIL_XDEBUG_MODE` permite a utilização do XDEBUG para depuração e análise de cobertura de código.
 
 4. Execute as migrações e seeders do banco de dados:
 
@@ -137,12 +142,19 @@ DELETE /api/despesas/{id}
 - Restrição de acesso é feita utilizando Policies com regras adicionais e tipos de usuário definidos.
 - Foi utilizado o padrão Conventional Commits
 - Foi utilizado o Pest para realizar os Testes
+- O ambiente de desenvolvimento está totalmente containerizado utilizando o Laravel Sail e Docker
 
-## Padrão de Commits Conventional Commit
+### Containerização com Laravel Sail e Docker
+
+O ambiente de desenvolvimento está totalmente containerizado utilizando o Laravel Sail e Docker. O Laravel Sail é uma maneira simples de configurar um ambiente de desenvolvimento local com Docker para projetos Laravel. Ele fornece um ambiente consistente e isolado para executar o aplicativo Laravel, juntamente com todas as suas dependências. Com o Docker, é possível garantir a portabilidade e a reprodução do ambiente de desenvolvimento em diferentes máquinas.
+
+A utilização do Laravel Sail facilita a configuração do ambiente de desenvolvimento, fornecendo uma estrutura pré-configurada com os serviços necessários, como banco de dados, servidor web e outros. Além disso, a containerização permite isolar o ambiente de desenvolvimento, evitando conflitos entre dependências e facilitando a colaboração em equipe.
+
+### Padrão de Commits Conventional Commit
 
 Neste projeto, foi adotado o padrão de commits Conventional Commit para fornecer uma estrutura consistente e informativa para as mensagens de commit. Esse padrão ajuda a transmitir claramente a intenção de cada commit e facilita a geração de changelogs automatizados.
 
-### Como funciona o padrão Conventional Commit?
+#### Como funciona o padrão Conventional Commit?
 
 O padrão Conventional Commit segue uma convenção específica para as mensagens de commit, que consiste em três partes principais: tipo, escopo e descrição. Cada parte é separada por dois-pontos (:). Aqui está uma descrição detalhada de cada parte:
 
@@ -161,15 +173,15 @@ O padrão Conventional Commit segue uma convenção específica para as mensagen
 
 Ao seguir o padrão Conventional Commit e utilizar emojis para os tipos de commit, você contribui para um histórico de commits mais consistente e compreensível, facilitando a colaboração e o acompanhamento das mudanças no projeto.
 
-## Testes com Pest Framework
+### Testes com Pest Framework
 
 Neste projeto, optei por utilizar o framework Pest para realizar os testes. Mas afinal, por que utilizei o Pest?
 
-### Padrão de Teste do Pest
+#### Padrão de Teste do Pest
 
 Primeiramente, é importante destacar que o Pest segue um padrão de teste diferente do PHPUnit, que é o framework de teste mais comumente utilizado. Enquanto o PHPUnit utiliza uma estrutura baseada em classes e métodos para escrever testes, o Pest adota uma abordagem mais descritiva, utilizando funções auxiliares como `test`, `it`, `expect`, entre outras. Essa abordagem torna os testes mais legíveis e expressivos, seguindo o conceito de "teste como especificação".
 
-### Benefícios do Pest
+#### Benefícios do Pest
 
 Agora, vamos aos benefícios que me levaram a escolher o Pest como framework de teste para este projeto:
 
@@ -183,11 +195,11 @@ Agora, vamos aos benefícios que me levaram a escolher o Pest como framework de 
 
 - **Testes de arquitetura (ainda não utilizado neste projeto)**: Embora não tenha sido aplicado neste projeto em particular, o Pest oferece recursos para realizar testes de arquitetura, o que é útil para verificar se as dependências e estruturas do projeto estão configuradas corretamente. Essa funcionalidade pode ser explorada em futuros projetos, caso necessário.
 
-### Sobre a relação com o PHPUnit
+#### Sobre a relação com o PHPUnit
 
 É importante mencionar que o Pest é construído em cima do PHPUnit, que é um framework de teste amplamente utilizado e confiável. O Pest utiliza o PHPUnit como base, fornecendo uma camada adicional de abstração e recursos específicos para testes mais descritivos. Portanto, posso aproveitar a robustez e a confiabilidade do PHPUnit, ao mesmo tempo em que utilizo a sintaxe expressiva e os recursos adicionais do Pest.
 
-### Executando os testes
+#### Executando os testes
 
 Para executar os testes utilizando o Pest neste projeto, você pode seguir as seguintes etapas:
 
@@ -231,7 +243,7 @@ No projeto atual a cobertura esta por volta de 96%.
 
 Essas são algumas opções que o Pest oferece para auxiliar na execução e análise dos testes. Aproveite esses recursos para garantir a qualidade e confiabilidade do seu código.
 
-## Adição de Links ao Retorno da API (HATEOAS)
+### Adição de Links ao Retorno da API (HATEOAS)
 
 Ao projetar uma API, acredito que seja uma prática interessante adicionar links ao retorno das respostas, seguindo o padrão HATEOAS (Hypermedia as the Engine of Application State). Esses links permitem que os clientes interajam de forma mais dinâmica e descubram facilmente outras ações ou recursos relacionados ao objeto retornado. O padrão HATEOAS promove a descoberta e a navegação da API de forma mais autônoma e orientada pelo próprio recurso retornado.
 
