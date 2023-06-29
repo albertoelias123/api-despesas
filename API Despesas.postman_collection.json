@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "1fff4593-60c5-4d6b-b4c0-dcfb59536d3e",
+		"name": "API Despesas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10204440"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var token = jsonData.token;\r",
+									"postman.setEnvironmentVariable(\"token\", token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "device_name",
+									"value": "PostmanClient",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Despesas",
+			"item": [
+				{
+					"name": "Index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/despesas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"despesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "descricao",
+									"value": "Descrição teste",
+									"type": "text"
+								},
+								{
+									"key": "data",
+									"value": "2022-10-01",
+									"type": "text"
+								},
+								{
+									"key": "valor",
+									"value": "25.50",
+									"type": "text"
+								},
+								{
+									"key": "dono",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/despesas/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"despesas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/despesas/25",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"despesas",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/despesas/100?descricao=Descrição teste Mod&data=2022-10-05&valor=220.10&dono=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"despesas",
+								"100"
+							],
+							"query": [
+								{
+									"key": "descricao",
+									"value": "Descrição teste Mod"
+								},
+								{
+									"key": "data",
+									"value": "2022-10-05"
+								},
+								{
+									"key": "valor",
+									"value": "220.10"
+								},
+								{
+									"key": "dono",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/despesas/200",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"despesas",
+								"200"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({",
+					"    key: 'Accept',",
+					"    value: 'application/json'",
+					"});",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Verificar status diferente de 401\", function () {",
+					"    pm.expect(pm.response.code).to.not.equal(401);",
+					"});",
+					"",
+					"pm.test(\"Realizar login se 401 e Unauthenticated\", function () {",
+					"    // Realizar login apenas se o status for igual a 401 e message Unauthenticated.",
+					"    if (pm.response.code !== 401 || pm.response.json().message !== \"Unauthenticated.\")",
+					"        return false;",
+					"        ",
+					"    const loginUrl = pm.variables.get(\"baseUrl\") + \"/login\";",
+					"    pm.sendRequest({",
+					"        url: loginUrl,",
+					"        method: \"POST\",",
+					"        header: {",
+					"            \"Content-Type\": \"application/json\"",
+					"        },",
+					"        body: {",
+					"            mode: \"raw\",",
+					"            raw: JSON.stringify({",
+					"                email: pm.variables.get(\"email\"),",
+					"                password: pm.variables.get(\"password\"),",
+					"                device_name: \"PostmanAutomaticLogin\"",
+					"            })",
+					"        }",
+					"    }, function (err, response) {",
+					"        // Verifica se a resposta tem status 200 e se recebeu um JSON com \"token\"",
+					"        if (response.code === 200 && response.json().hasOwnProperty(\"token\")) {",
+					"            // Salva o token na variável de ambiente \"token\"",
+					"            pm.environment.set(\"token\", response.json().token);",
+					"        }",
+					"    });",
+					"});"
+				]
+			}
+		}
+	]
+}

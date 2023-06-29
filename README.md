@@ -13,17 +13,24 @@ Fique à vontade para explorar o código-fonte, revisar a estrutura e as funcion
 ## Índice
 
 - [API de Despesas](#api-de-despesas)
-- [Funcionalidades](#funcionalidades)
-- [Requisitos](#requisitos)
-- [Instalação](#instalação)
-- [API](#api)
-  - [Autenticação](#autenticação)
-  - [Despesas](#despesas)
-- [Detalhes técnicos](#detalhes-técnicos)
-  - [Containerização com Laravel Sail e Docker](#containerização-com-laravel-sail-e-docker)
-  - [Padrão de Commits Conventional Commit](#padrão-de-commits-conventional-commit)
-  - [Testes com Pest Framework](#testes-com-pest-framework)
-  - [Adição de Links ao Retorno da API (HATEOAS)](#adição-de-links-ao-retorno-da-api-hateoas)
+  - [Índice](#índice)
+  - [Funcionalidades](#funcionalidades)
+  - [Requisitos](#requisitos)
+  - [Instalação](#instalação)
+  - [API](#api)
+    - [Testando a API com o Postman](#testando-a-api-com-o-postman)
+    - [Autenticação](#autenticação)
+    - [Despesas](#despesas)
+  - [Detalhes técnicos](#detalhes-técnicos)
+    - [Containerização com Laravel Sail e Docker](#containerização-com-laravel-sail-e-docker)
+    - [Padrão de Commits Conventional Commit](#padrão-de-commits-conventional-commit)
+      - [Como funciona o padrão Conventional Commit?](#como-funciona-o-padrão-conventional-commit)
+    - [Testes com Pest Framework](#testes-com-pest-framework)
+      - [Padrão de Teste do Pest](#padrão-de-teste-do-pest)
+      - [Benefícios do Pest](#benefícios-do-pest)
+      - [Sobre a relação com o PHPUnit](#sobre-a-relação-com-o-phpunit)
+      - [Executando os testes](#executando-os-testes)
+    - [Adição de Links ao Retorno da API (HATEOAS)](#adição-de-links-ao-retorno-da-api-hateoas)
 
 
 
@@ -74,6 +81,30 @@ Esse atributo `SAIL_XDEBUG_MODE` permite a utilização do XDEBUG para depuraç�
 ```
 
 ## API
+
+### Testando a API com o Postman
+
+Na pasta raiz do repositório, você encontrará um arquivo do Postman chamado `API Despesas.postman_collection.json`. Esse arquivo representa uma coleção de solicitações pré-configuradas que podem ser importadas no Postman para facilitar o teste e a exploração da API de Despesas desenvolvida neste projeto.
+
+Para utilizar o arquivo de coleção do Postman e testar o funcionamento da API, siga as etapas abaixo:
+
+1. Faça o download do arquivo `API Despesas.postman_collection.json` presente na pasta raiz do repositório.
+
+2. Abra o Postman e clique no botão "Import" no canto superior esquerdo do aplicativo.
+
+3. Na janela de importação, selecione a guia "File" e clique em "Upload Files".
+
+4. Navegue até o local onde você salvou o arquivo `API Despesas.postman_collection.json` e selecione-o para importar.
+
+5. Após a importação bem-sucedida, você verá a coleção "API Despesas" na barra lateral esquerda do Postman.
+
+6. Clique na coleção para expandi-la e visualizar as solicitações disponíveis.
+
+7. Para executar uma solicitação, clique nela e, em seguida, clique no botão "Send" para enviar a solicitação para a API. Observe as respostas recebidas e os detalhes das solicitações no painel direito.
+
+8. Você pode explorar e modificar as solicitações existentes, bem como adicionar novas solicitações à coleção conforme necessário.
+
+Utilizando o arquivo de coleção do Postman, você poderá realizar uma série de testes na API de Despesas de forma conveniente e eficiente, aproveitando as solicitações pré-configuradas. Isso permitirá que você verifique o funcionamento correto da API, teste diferentes endpoints e métodos, envie dados de teste e visualize as respostas retornadas pela API.
 
 ### Autenticação
 Faça uma solicitação de login para obter um token de acesso:
