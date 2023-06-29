@@ -34,8 +34,9 @@ class DespesaController extends Controller
             return (new DespesasCollection(Despesa::paginate()))->response();
         }
 
-        if(Auth::user()->isRegular())
+        if(Auth::user()->isRegular()) {
             return (new DespesasCollection(Auth::user()->despesas()->paginate()))->response();
+        }
     }
 
     /**

@@ -35,7 +35,7 @@ class DespesaCriada extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->line('Foi criada uma nova despesa.')
                     ->line("Dono: {$this->despesa->dono()->first()->name}")
                     ->line("Data: {$this->despesa->data}")

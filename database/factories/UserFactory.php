@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
-
     public function definition(): array
     {
         return [
